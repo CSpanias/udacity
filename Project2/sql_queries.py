@@ -37,7 +37,8 @@ staging_events_table_create= ("""
     status INT,
     ts INT,
     user_agent VARCHAR,
-    user_id INT);
+    user_id INT
+    );
 """)
 
 staging_songs_table_create = ("""
@@ -52,13 +53,14 @@ staging_songs_table_create = ("""
     song_id INT,
     title VARCHAR,
     duration FLOAT,
-    year INT,
+    year INT
     );
 """)
 
 songplay_table_create = ("""
     CREATE TABLE IF NOT EXISTS songplays
-    (songplay_id int PRIMARY KEY,
+    (
+    songplay_id int PRIMARY KEY,
     start_time TIMESTAMP,
     user_id INT,
     level VARCHAR,
@@ -66,16 +68,19 @@ songplay_table_create = ("""
     artist_id INT,
     session_id INT,
     location VARCHAR,
-    user_agent VARCHAR);
+    user_agent VARCHAR
+    );
 """)
 
 user_table_create = ("""
     CREATE TABLE IF NOT EXISTS users
-    (user_id INT PRIMARY KEY,
+    (
+    user_id INT PRIMARY KEY,
     first_name VARCHAR,
     last_name VARCHAR,
     gender VARCHAR,
-    level VARCHAR);
+    level VARCHAR
+    );
 """)
 
 song_table_create = ("""
@@ -84,7 +89,8 @@ song_table_create = ("""
     song_id INT PRIMARY KEY,
     title VARCHAR,
     artist_id INT,
-    duration FLOAT);
+    duration FLOAT
+    );
 """)
 
 artist_table_create = ("""
@@ -94,7 +100,8 @@ artist_table_create = ("""
     name VARCHAR,
     location VARCHAR,
     lattitude INT,
-    longitude INT);
+    longitude INT
+    );
 """)
 
 time_table_create = ("""
@@ -106,7 +113,8 @@ time_table_create = ("""
     week VARCHAR,
     month VARCHAR,
     year INT,
-    weekday VARCHAR)
+    weekday VARCHAR
+    );
 """)
 
 # STAGING TABLES
@@ -144,7 +152,7 @@ songplay_table_insert = ("""
         LEFT JOIN staging_songs as so ON se.song=so.title 
             AND se.artist = so.artist_name 
             AND ABS(se.length - so.duration) < 2
-            WHERE se.page = 'NextSong'
+            WHERE se.page = 'NextSong';
 """)
 
 user_table_insert = ("""
@@ -155,7 +163,7 @@ user_table_insert = ("""
     last_name,
     gender,
     level
-    FROM staging_events
+    FROM staging_events;
 """)
 
 song_table_insert = ("""
@@ -166,7 +174,7 @@ song_table_insert = ("""
     artist_id,
     year,
     duration
-    FROM staging_songs
+    FROM staging_songs;
 """)
 
 artist_table_insert = ("""
@@ -177,7 +185,7 @@ artist_table_insert = ("""
     artist_location,
     artist_latitude,
     artist_longitude
-    FROM staging_songs
+    FROM staging_songs;
 """)
 
 time_table_insert = ("""
@@ -191,7 +199,7 @@ time_table_insert = ("""
     extract(week from ts),
     extract(year from ts),
     extract(weekday from ts)
-    FROM temp_time
+    FROM temp_time;
 """)
 
 # QUERY LISTS
