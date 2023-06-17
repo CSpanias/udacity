@@ -27,7 +27,7 @@ staging_events_table_create= ("""
     item_in_session INT,
     last_name VARCHAR,
     length FLOAT,
-    level IDENTITY(free, paid),
+    level VARCHAR,
     location VARCHAR,
     method VARCHAR,
     page VARCHAR,
